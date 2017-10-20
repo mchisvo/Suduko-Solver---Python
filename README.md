@@ -15,8 +15,7 @@ The puzzle is to fill in the rest of the grid so that every
 row, every column, and every 3x3 box contains the digits 1 through 9. 
 In other words, every row contains all nine digits, every column 
 contains all nine digits, and every box contains all nine 
-digits. Your assignment is to write a program to try to solve **Sudoku** puzzles. 
-You won't be able to solve them all. 
+digits. Your assignment is to write a program to try to solve **Sudoku** puzzles.  You won't be able to solve them all. 
 
 ![alt text](https://github.com/BBK-DCSIS-PoP-I-2017-18/sudoku/blob/master/images/puzzsolved.gif "Puzzle")
 
