@@ -4,6 +4,8 @@ Purposes of this assignment:
 -   To give you experience with sets.
 -   To get you started with "arrays" (lists, and lists of lists) and nested loops.
 -   To enforce the idea of unit testing.
+-   To approach a problem by using *Test-Driven-Development* (TDD).
+-   To use the Travis Continuous Integration (CI) process.
 
 General idea of the assignment:
 ===============================
