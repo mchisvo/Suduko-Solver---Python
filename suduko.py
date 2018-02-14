@@ -41,7 +41,6 @@ def convertToSets(problem):
                 problem[i][j] = s  # Sets the particular number to the ful set
             else:
                 problem[i][j] = {num}  # Makes the number at that index a singleton set could use {problem[i][j]}
-
     return problem
 
 
