@@ -20,7 +20,7 @@ problem = [ [ 0, 8, 0,   0, 0, 0,   2, 0, 5 ],
 
 
 def print_sudoku(problem):
-    """"""
+    """ Prints out a suduko grid representing the problem to be solved"""
     print("-"*37)
     for row, cols in enumerate(problem,1): # Enumerate each list beggining with one
         print(("|" + " {}   {}   {} |"*3).format(*[x if x != 0 else "." for x in cols])) #String format and list comprehension based on the list
@@ -45,7 +45,7 @@ def convertToSets(problem):
     return problem
 
 
-def test_convertToSets():
+def testconvertToSets():
     ary = [[0, 1, 2], [1, 0, 2], [0, 1, 0]]
     s = set(range(1, 10))
     assert convertToSets(ary) == [[s, {1}, {2}], [{1}, s, {2}], [s, {1}, s]]
@@ -53,12 +53,24 @@ def test_convertToSets():
 
 
 def getRowLocations(rowNumber):
+    """Function that returns a list of tuples, each specifying the location of elements of a row based on a row number
+    (i,j)"""
+    return sorted([(rowNumber, j) for j in range(0, 9)])
+
+
+
+def testGetRowLocations():
+    lst = [(5, 0), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (5, 8)]
+    assert getRowLocations(5) == lst
+
+
+def getColumnLocations(columnNumber):
     return False
 
 
-def test_GetRowLocations(self):
-    lst = [(5, 0), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (5, 8)]
-    assert getRowLocations(5) == lst
+def testGetColumnLocations(self):
+    lst = [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5), (7, 5), (8, 5)]
+    assert getColumnLocations(5) == lst
 
 
 
