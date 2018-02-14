@@ -35,12 +35,12 @@ def convertToSets(problem):
         i is row and j is column. consider re-writting with i and j BLLALALALALALA
         """
     s = set(range(1, 10))
-    for i, row in enumerate(problem): # Gives a row index and the row
-        for j, num in enumerate(row): # Gives the number index and the number
+    for i, row in enumerate(problem):  # Gives a row index and the row
+        for j, num in enumerate(row):  # Gives the number index and the number
             if num == 0:
-                problem[i][j] = s # Sets the particular number to the ful set
+                problem[i][j] = s  # Sets the particular number to the ful set
             else:
-                problem[i][j] = {num} # Makes the number at that index a singleton set could use {problem[i][j]}
+                problem[i][j] = {num}  # Makes the number at that index a singleton set could use {problem[i][j]}
 
     return problem
 
@@ -65,10 +65,12 @@ def testGetRowLocations():
 
 
 def getColumnLocations(columnNumber):
-    return False
+    """Function that returns a list of tuples, each specifying the location of elements of a column based on a column number
+        (i,j)"""
+    return sorted([(j, columnNumber) for j in range(0,9)])
 
 
-def testGetColumnLocations(self):
+def testGetColumnLocations():
     lst = [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5), (7, 5), (8, 5)]
     assert getColumnLocations(5) == lst
 
