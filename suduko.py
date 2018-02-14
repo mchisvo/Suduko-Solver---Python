@@ -32,30 +32,33 @@ def print_sudoku(problem):
 def convertToSets(problem):
     """Creates and returns a new 2d array of sets. For each location  with a number 1 to 9, a singleton set
         of that number is created. For each ,location with a zero, create a set containing numbers 1 through 9.
-        i is row and j is column
+        i is row and j is column. consider re-writting with i and j BLLALALALALALA
         """
     s = set(range(1, 10))
-    for i, row in enumerate(problem):
-        for j, num in enumerate(row):
+    for i, row in enumerate(problem): # Gives a row index and the row
+        for j, num in enumerate(row): # Gives the number index and the number
             if num == 0:
-                problem[i][j] = s
-                #print(j)
-
+                problem[i][j] = s # Sets the particular number to the ful set
             else:
-                problem[i][j] = set({num})
-                #print(j)
+                problem[i][j] = {num} # Makes the number at that index a singleton set could use {problem[i][j]}
 
     return problem
 
 
 def test_convertToSets():
-    """Creates and returns a new 2d array of sets. For each location  with a number 1 to 9, a singleton set
-    of that number is created. For each ,location with a zero, create a set containing numbers 1 through 9.
-    """
     ary = [[0, 1, 2], [1, 0, 2], [0, 1, 0]]
     s = set(range(1, 10))
     assert convertToSets(ary) == [[s, {1}, {2}], [{1}, s, {2}], [s, {1}, s]]
-    #assert isinstance(ary[0][0], int)  # True  "The original array has been changed.")
+    # assert isinstance(ary[0][0], int)  # True  "The original array has been changed.")
 
 
-print(convertToSets(problem))
+def getRowLocations(rowNumber):
+    return False
+
+
+def test_GetRowLocations(self):
+    lst = [(5, 0), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (5, 8)]
+    assert getRowLocations(5) == lst
+
+
+
