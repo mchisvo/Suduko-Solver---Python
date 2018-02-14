@@ -34,15 +34,16 @@ def convertToSets(problem):
         of that number is created. For each ,location with a zero, create a set containing numbers 1 through 9.
         i is row and j is column
         """
-    s = set(range(1,10))
-    for i, j in enumerate(problem):
-        for i in problem:
-            for j in problem:
-                if j == 0:
-                    j = s
-                else:
-                    j = set(j)
+    s = set(range(1, 10))
+    for i, row in enumerate(problem):
+        for j, num in enumerate(row):
+            if num == 0:
+                problem[i][j] = s
+                #print(j)
 
+            else:
+                problem[i][j] = set({num})
+                #print(j)
 
     return problem
 
@@ -54,4 +55,7 @@ def test_convertToSets():
     ary = [[0, 1, 2], [1, 0, 2], [0, 1, 0]]
     s = set(range(1, 10))
     assert convertToSets(ary) == [[s, {1}, {2}], [{1}, s, {2}], [s, {1}, s]]
-    assert convertToSets(ary[0][0]) is int  # True  "The original array has been changed.")
+    #assert isinstance(ary[0][0], int)  # True  "The original array has been changed.")
+
+
+print(convertToSets(problem))
