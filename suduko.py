@@ -16,7 +16,7 @@ problem = [ [ 0, 8, 0,   0, 0, 0,   2, 0, 5 ],
 
   [ 0, 6, 0,   0, 4, 5,   0, 0, 3 ],
   [ 2, 9, 0,   0, 0, 6,   5, 0, 1 ],
-  [ 4, 0, 5,   0, 0, 0,   8, 7, 0 ] ]
+  [ 4, 0, 5,   0, 0, 0,   8, 7, 0 ]]
 
 
 def print_sudoku(problem):
@@ -74,4 +74,6 @@ def testGetColumnLocations():
     assert getColumnLocations(5) == lst
 
 
-
+def testGetBoxLocations(self):
+    lst = [(3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2)]
+    assert set(lst) == set(getBoxLocations((3, 2)))
