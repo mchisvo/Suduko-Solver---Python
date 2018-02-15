@@ -54,6 +54,12 @@ def getBoxLocations(location):
 
 
 def eliminate(problem, location, listOfLocations):
+    """The given location in the array problem should contain a set containing a single number.
+    For each location in the listOfLocations except location**, remove the number in location from the set in each
+    other location. This function changes the array problem and returns a count of the number of eliminations (removals)
+     actually made.This function should work for any two-dimensional array, not just a 9x9 array (this will make
+     writing unit tests easier)."""
+
     return False
 
 
@@ -66,8 +72,10 @@ def solve(problem):
     """
     for rowi, row in enumerate(problem):
         for colj, num in enumerate(problem):
-            if len(problem[rowi][colj]) == 1:
-                print(problem[rowi][colj])
+            if len(problem[rowi][colj]) == 1: # If a singleton is found eliminate it from row, columns and box
+                location = (rowi, colj)
+                listOfLocations = getBoxLocations(location) + getColumnLocations(location) + getRowLocations(location)
+                eliminate(problem, location, listOfLocations)
 
 def main():
     problem = [[0, 8, 0, 0, 0, 0, 2, 0, 5],
