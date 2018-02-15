@@ -80,11 +80,39 @@ def getBoxLocations(location):
     box_locations = []
     for i, row in enumerate(range(row_start,row_start+3)):  # Gives a row index and the row
         for j, num in enumerate(range(col_start, col_start +3)):  # Gives the colum index and the number
-            box_locations.append((row,num))
-
+            box_locations.append((row, num))
     return box_locations
 
 
 def testGetBoxLocations():
     lst = [(3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2)]
     assert set(lst) == set(getBoxLocations((3, 2)))
+
+
+def testEliminate(self):
+    sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 2, 3}]]
+    location = (1, 2) # contains {2}
+    count = eliminate(sets, location, [(0, 0), (1, 0), (2, 2)])
+    self.assertEqual(2, count)
+    self.assertEqual([[{1}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 3}]],
+                     sets)
+
+def main():
+    problem = [[0, 8, 0, 0, 0, 0, 2, 0, 5],
+               [7, 0, 1, 4, 0, 0, 0, 8, 9],
+               [9, 0, 0, 3, 5, 0, 0, 1, 0],
+
+               [0, 0, 9, 0, 0, 7, 6, 3, 0],
+               [0, 0, 2, 0, 0, 9, 7, 0, 0],
+               [0, 7, 8, 5, 0, 0, 0, 0, 0],
+
+               [0, 6, 0, 0, 4, 5, 0, 0, 3],
+               [2, 9, 0, 0, 0, 6, 5, 0, 1],
+               [4, 0, 5, 0, 0, 0, 8, 7, 0]]
+    #read_sudoku(problem)
+    print_sudoku(problem)
+    problem = convertToSets(problem)
+    print(problem)
+
+
+main()
