@@ -74,6 +74,17 @@ def testGetColumnLocations():
     assert getColumnLocations(5) == lst
 
 
-def testGetBoxLocations(self):
+def getBoxLocations(location):
+    row_start = location[0] // 3 *3
+    col_start = location[1] // 3 *3
+    box_locations = []
+    for i, row in enumerate(range(row_start,row_start+3)):  # Gives a row index and the row
+        for j, num in enumerate(range(col_start, col_start +3)):  # Gives the colum index and the number
+            box_locations.append((row,num))
+
+    return box_locations
+
+
+def testGetBoxLocations():
     lst = [(3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2)]
     assert set(lst) == set(getBoxLocations((3, 2)))
