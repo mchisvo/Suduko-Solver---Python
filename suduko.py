@@ -6,19 +6,6 @@ def read_sudoku(file):
     return eval("".join(data))
 
 
-problem = [ [ 0, 8, 0,   0, 0, 0,   2, 0, 5 ],
-  [ 7, 0, 1,   4, 0, 0,   0, 8, 9 ],
-  [ 9, 0, 0,   3, 5, 0,   0, 1, 0 ],
-
-  [ 0, 0, 9,   0, 0, 7,   6, 3, 0 ],
-  [ 0, 0, 2,   0, 0, 9,   7, 0, 0 ],
-  [ 0, 7, 8,   5, 0, 0,   0, 0, 0 ],
-
-  [ 0, 6, 0,   0, 4, 5,   0, 0, 3 ],
-  [ 2, 9, 0,   0, 0, 6,   5, 0, 1 ],
-  [ 4, 0, 5,   0, 0, 0,   8, 7, 0 ]]
-
-
 def print_sudoku(problem):
     """ Prints out a suduko grid representing the problem to be solved"""
     print("-"*37)
@@ -43,14 +30,6 @@ def convertToSets(problem):
                 problem[i][j] = {num}  # Makes the number at that index a singleton set could use {problem[i][j]}
     return problem
 
-
-def testconvertToSets():
-    ary = [[0, 1, 2], [1, 0, 2], [0, 1, 0]]
-    s = set(range(1, 10))
-    assert convertToSets(ary) == [[s, {1}, {2}], [{1}, s, {2}], [s, {1}, s]]
-    # assert isinstance(ary[0][0], int)  # True  "The original array has been changed.")
-
-
 def getRowLocations(rowNumber):
     """Function that returns a list of tuples, each specifying the location of elements of a row based on a row number
     (i,j)"""
@@ -58,20 +37,10 @@ def getRowLocations(rowNumber):
 
 
 
-def testGetRowLocations():
-    lst = [(5, 0), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (5, 8)]
-    assert getRowLocations(5) == lst
-
-
 def getColumnLocations(columnNumber):
     """Function that returns a list of tuples, each specifying the location of elements of a column based on a column number
         (i,j)"""
     return sorted([(j, columnNumber) for j in range(0,9)])
-
-
-def testGetColumnLocations():
-    lst = [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5), (7, 5), (8, 5)]
-    assert getColumnLocations(5) == lst
 
 
 def getBoxLocations(location):
@@ -84,18 +53,21 @@ def getBoxLocations(location):
     return box_locations
 
 
-def testGetBoxLocations():
-    lst = [(3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2)]
-    assert set(lst) == set(getBoxLocations((3, 2)))
+def eliminate(problem, location, listOfLocations):
+    return False
 
 
-def testEliminate(self):
-    sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 2, 3}]]
-    location = (1, 2) # contains {2}
-    count = eliminate(sets, location, [(0, 0), (1, 0), (2, 2)])
-    self.assertEqual(2, count)
-    self.assertEqual([[{1}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 3}]],
-                     sets)
+def solve(problem):
+    """given a two-dimensional array problem of sets, try to solve it. This function changes the array problem and
+    returns True if the problem has been solved, False otherwise. Here's what this function needs to do.
+    For every location in the array, call eliminate with row, column, and box locations. If any values have been
+    eliminated (eliminate returns something other than zero), repeat this procedure. When it is no longer possible
+    to eliminate anything, return the boolean result.
+    """
+    for rowi, row in enumerate(problem):
+        for colj, num in enumerate(problem):
+            if len(problem[rowi][colj]) == 1:
+                print(problem[rowi][colj])
 
 def main():
     problem = [[0, 8, 0, 0, 0, 0, 2, 0, 5],
@@ -110,9 +82,17 @@ def main():
                [2, 9, 0, 0, 0, 6, 5, 0, 1],
                [4, 0, 5, 0, 0, 0, 8, 7, 0]]
     #read_sudoku(problem)
-    print_sudoku(problem)
+    #print_sudoku(problem)
     problem = convertToSets(problem)
-    print(problem)
+
+    solve(problem)
+    #listOfLocations = []
+    #for rowi, row in enumerate(problem):
+       # for colj, num in enumerate(problem):
+        #    if problem[rowi][colj].issubset
+        #    listOfLocations.append((rowi, colj))
+    # Need a for loop to step through each location and eliminate numbers based on eliminate function.
+   # #print(listOfLocations)
 
 
 main()
