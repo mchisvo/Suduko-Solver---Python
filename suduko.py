@@ -30,6 +30,13 @@ def convertToSets(problem):
                 problem[i][j] = {num}  # Makes the number at that index a singleton set could use {problem[i][j]}
     return problem
 
+
+def convertToInts(problem):
+    for i, row in enumerate(problem):  # Gives a row index and the row
+        for j, num in enumerate(row):
+            problem[i][j] = list(num)
+    return problem
+
 def getRowLocations(rowNumber):
     """Function that returns a list of tuples, each specifying the location of elements of a row based on a row number
     (i,j)"""
@@ -44,7 +51,7 @@ def getColumnLocations(columnNumber):
 
 
 def getBoxLocations(location):
-    row_start = location[0] // 3 * 3
+    row_start = location[0] // 3 * 3  # mathematical jiggery pokery
     col_start = location[1] // 3 * 3
     box_locations = []
     for i, row in enumerate(range(row_start,row_start+3)):  # Gives a row index and the row
@@ -65,12 +72,12 @@ def eliminate(problem, location, listOfLocations):
     for position in listOfLocations:
         if position != location:
             elimination_set = problem[position[0]][position[1]]  # identify the set to have an element eliminated from
-            # remove the singleton from the original list from every position related to it.
+            # remove the singleton from the original list, for loop repeats this
             problem[position[0]][position[1]] = elimination_set - singleton
             if len(problem[position[0]][position[1]]) < len(elimination_set):
                 count += 1
 
-    print(problem)
+    #print(problem)
     return count
 
 
@@ -90,16 +97,19 @@ def solve(problem):
                     #print(location)
                     listOfLocations = getBoxLocations(location) + getColumnLocations(location[1]) + getRowLocations(location[0])
                     #print(listOfLocations)
-                    new_problem = eliminate(problem, location, listOfLocations)
-                    #sum_count += eliminate(problem, location, listOfLocations)
-    print(new_problem)
+                    eliminate(problem, location, listOfLocations)
+                    # sum_count += eliminate(problem, location, listOfLocations)
+    print(problem)
+
 
 def isSolved(problem):
     """Given a two-dimensional array problem of sets, return True if the Sudoku problem has been solved
     (every set contains exactly one element), and False otherwise"""
-    for sets in problem:
-        print(sets)
-    return False
+    for lists in problem:
+        for sets in lists:
+            if len(sets) > 1:
+                return False
+    return True
 
 def main():
     problem = [[0, 8, 0, 0, 0, 0, 2, 0, 5],

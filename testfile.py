@@ -8,6 +8,11 @@ def testconvertToSets():
     # assert isinstance(ary[0][0], int)  # True  "The original array has been changed.")
 
 
+def testConvertToInts():
+    sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {3}]]
+    assert convertToInts(sets) == [[[1, 2], [3], [4]], [[1], [3, 5, 7], [2]], [[2, 3], [2], [3]]] # the original assertion on this test was wrong why?
+    #self.assertTrue(type(sets[0][0]) is set, "The original array has been changed.")
+
 def testGetRowLocations():
     lst = [(5, 0), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (5, 8)]
     assert getRowLocations(5) == lst
@@ -38,3 +43,6 @@ def testIsSolved():
     assert (all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)]))
     array[3][5] = {1, 2}
     assert (all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)])) == False
+
+
+
