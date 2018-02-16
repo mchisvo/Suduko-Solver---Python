@@ -10,7 +10,7 @@ def testconvertToSets():
 
 def testConvertToInts():
     sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {3}]]
-    assert convertToInts(sets) == [[[1, 2], [3], [4]], [[1], [3, 5, 7], [2]], [[2, 3], [2], [3]]] # the original assertion on this test was wrong why?
+    assert convertToInts(sets) == [[[1, 2], 3, 4], [1, [3, 5, 7], 2], [[2, 3], 2, 3]] # the original assertion on this test was wrong why?
     #self.assertTrue(type(sets[0][0]) is set, "The original array has been changed.")
 
 def testGetRowLocations():
