@@ -32,9 +32,9 @@ def testEliminate():
     assert sets == [[{1}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 3}]]
 
 
-#def testIsSolved(self):
+def testIsSolved():
     # Just check whether every cell has been reduced to one number
-    #array = [[{1}] * 9] * 9
-    #self.assertTrue(all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)]))
-    #array[3][5] = {1, 2}
-    #self.assertFalse(all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)]))
+    array = [[{1}] * 9] * 9
+    assert (all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)]))
+    array[3][5] = {1, 2}
+    assert (all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)])) == False

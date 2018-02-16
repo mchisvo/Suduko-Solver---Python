@@ -81,20 +81,24 @@ def solve(problem):
     eliminated (eliminate returns something other than zero), repeat this procedure. When it is no longer possible
     to eliminate anything, return the boolean result.
     """
-
     sum_count = 0
-    for rowi, row in enumerate(problem):
-        for colj, num in enumerate(problem):
-            if len(problem[rowi][colj]) == 1: # If a singleton is found eliminate it from row, columns and box
-                location = (rowi, colj)
-                #print(location)
-                listOfLocations = getBoxLocations(location) + getColumnLocations(location[1]) + getRowLocations(location[0])
-                #print(listOfLocations)
-                new_problem = eliminate(problem, location, listOfLocations)
-                #sum_count += eliminate(problem, location, listOfLocations)
+    while not isSolved(problem):
+        for rowi, row in enumerate(problem):
+            for colj, num in enumerate(problem):
+                if len(problem[rowi][colj]) == 1: # If a singleton is found eliminate it from row, columns and box
+                    location = (rowi, colj)
+                    #print(location)
+                    listOfLocations = getBoxLocations(location) + getColumnLocations(location[1]) + getRowLocations(location[0])
+                    #print(listOfLocations)
+                    new_problem = eliminate(problem, location, listOfLocations)
+                    #sum_count += eliminate(problem, location, listOfLocations)
     print(new_problem)
 
 def isSolved(problem):
+    """Given a two-dimensional array problem of sets, return True if the Sudoku problem has been solved
+    (every set contains exactly one element), and False otherwise"""
+    for sets in problem:
+        print(sets)
     return False
 
 def main():
