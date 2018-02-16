@@ -11,9 +11,9 @@ def print_sudoku(problem):
     print("-"*37)
     for row, cols in enumerate(problem,1): # Enumerate each list beggining with one
         print(("|" + " {}   {}   {} |"*3).format(*[x if x != 0 else "." for x in cols])) #String format and list comprehension based on the list
-        if row == 9: # On the 9th list print a seperating line.
+        if row == 9:  # On the 9th list print a seperating line.
             print("-"*37)
-        elif row % 3 == 0: # After ever 3rd list print a seperating line
+        elif row % 3 == 0:  # After ever 3rd list print a seperating line
             print("|" + "-"*35 + "|")
 
 def convertToSets(problem):
@@ -35,6 +35,8 @@ def convertToInts(problem):
     for i, row in enumerate(problem):  # Gives a row index and the row
         for j, num in enumerate(row):
             problem[i][j] = list(num)
+            if len(problem[i][j]) == 1:
+                problem[i][j] = problem[i][j][0]
     return problem
 
 def getRowLocations(rowNumber):
@@ -61,8 +63,7 @@ def getBoxLocations(location):
 
 
 def eliminate(problem, location, listOfLocations):
-    """The given location in the array problem should contain a set containing a single number.
-    For each location in the listOfLocations except location, remove the number in location from the set in each
+    """For each location in the listOfLocations except location, remove the number in location from the set in each
     other location. This function changes the array problem and returns a count of the number of eliminations (removals)
      actually made.This function should work for any two-dimensional array, not just a 9x9 array (this will make
      writing unit tests easier)."""
@@ -82,9 +83,8 @@ def eliminate(problem, location, listOfLocations):
 
 
 def solve(problem):
-    """given a two-dimensional array problem of sets, try to solve it. This function changes the array problem and
-    returns True if the problem has been solved, False otherwise. Here's what this function needs to do.
-    For every location in the array, call eliminate with row, column, and box locations. If any values have been
+    """This function changes the array problem andreturns True if the problem has been solved, False otherwise.
+    Here's what this function needs to do. For every location in the array, call eliminate with row, column, and box locations. If any values have been
     eliminated (eliminate returns something other than zero), repeat this procedure. When it is no longer possible
     to eliminate anything, return the boolean result.
     """
@@ -100,7 +100,10 @@ def solve(problem):
                     eliminate(problem, location, listOfLocations)
                     # sum_count += eliminate(problem, location, listOfLocations)
     print(problem)
+    convertToInts(problem)
+    print(problem)
 
+    print_sudoku(problem) # need to get rid of the list brackets, perhaps join.
 
 def isSolved(problem):
     """Given a two-dimensional array problem of sets, return True if the Sudoku problem has been solved
@@ -112,17 +115,17 @@ def isSolved(problem):
     return True
 
 def main():
-    problem = [[0, 8, 0, 0, 0, 0, 2, 0, 5],
-               [7, 0, 1, 4, 0, 0, 0, 8, 9],
-               [9, 0, 0, 3, 5, 0, 0, 1, 0],
+    problem = [[9, 0, 0,  0, 0, 8,  0, 0, 0],
+                   [0, 0, 0,  0, 3, 2,  0, 0, 0],
+                   [6, 8, 0,  9, 0, 1,  0, 7, 2],
 
-               [0, 0, 9, 0, 0, 7, 6, 3, 0],
-               [0, 0, 2, 0, 0, 9, 7, 0, 0],
-               [0, 7, 8, 5, 0, 0, 0, 0, 0],
+                   [8, 0, 9,  5, 2, 0,  0, 3, 0],
+                   [2, 0, 0,  0, 0, 0,  0, 0, 5],
+                   [5, 4, 6,  1, 9, 3,  7, 2, 8],
 
-               [0, 6, 0, 0, 4, 5, 0, 0, 3],
-               [2, 9, 0, 0, 0, 6, 5, 0, 1],
-               [4, 0, 5, 0, 0, 0, 8, 7, 0]]
+                   [0, 2, 0,  3, 0, 9,  0, 6, 4],
+                   [0, 0, 0,  2, 8, 0,  0, 0, 0],
+                   [0, 0, 0,  6, 0, 0,  0, 0, 3]]
     #read_sudoku(problem)
     #print_sudoku(problem)
     problem = convertToSets(problem)
