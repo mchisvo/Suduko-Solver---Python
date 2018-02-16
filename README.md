@@ -155,7 +155,7 @@ We will be able to see if you have via your commit history** (although obviously
     in *`problem`* contains an empty set (this should never happen), put
     a `0` in the result array.
 
-`def getRowLocations(rowNumber)`:   
+`def getRowLocations(rowNumber)`:   Use the Zip function here
     Given a `rowNumber`, return a list of all nine "locations" 
     (`(row, column)`  tuples) in that row. 
 
