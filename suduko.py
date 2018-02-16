@@ -44,8 +44,8 @@ def getColumnLocations(columnNumber):
 
 
 def getBoxLocations(location):
-    row_start = location[0] // 3 *3
-    col_start = location[1] // 3 *3
+    row_start = location[0] // 3 * 3
+    col_start = location[1] // 3 * 3
     box_locations = []
     for i, row in enumerate(range(row_start,row_start+3)):  # Gives a row index and the row
         for j, num in enumerate(range(col_start, col_start +3)):  # Gives the colum index and the number
@@ -55,12 +55,23 @@ def getBoxLocations(location):
 
 def eliminate(problem, location, listOfLocations):
     """The given location in the array problem should contain a set containing a single number.
-    For each location in the listOfLocations except location**, remove the number in location from the set in each
+    For each location in the listOfLocations except location, remove the number in location from the set in each
     other location. This function changes the array problem and returns a count of the number of eliminations (removals)
      actually made.This function should work for any two-dimensional array, not just a 9x9 array (this will make
      writing unit tests easier)."""
+    count = 0
+    singleton = problem[location[0]][location[1]]
+    #print(singleton)
+    for position in listOfLocations:
+        if position != location:
+            elimination_set = problem[position[0]][position[1]]  # identify the set to have an element eliminated from
+            # remove the singleton from the original list from every position related to it.
+            problem[position[0]][position[1]] = elimination_set - singleton
+            if len(problem[position[0]][position[1]]) < len(elimination_set):
+                count += 1
 
-    return False
+    print(problem)
+    return count
 
 
 def solve(problem):
@@ -70,12 +81,21 @@ def solve(problem):
     eliminated (eliminate returns something other than zero), repeat this procedure. When it is no longer possible
     to eliminate anything, return the boolean result.
     """
+
+    sum_count = 0
     for rowi, row in enumerate(problem):
         for colj, num in enumerate(problem):
             if len(problem[rowi][colj]) == 1: # If a singleton is found eliminate it from row, columns and box
                 location = (rowi, colj)
-                listOfLocations = getBoxLocations(location) + getColumnLocations(location) + getRowLocations(location)
-                eliminate(problem, location, listOfLocations)
+                #print(location)
+                listOfLocations = getBoxLocations(location) + getColumnLocations(location[1]) + getRowLocations(location[0])
+                #print(listOfLocations)
+                new_problem = eliminate(problem, location, listOfLocations)
+                #sum_count += eliminate(problem, location, listOfLocations)
+    print(new_problem)
+
+def isSolved(problem):
+    return False
 
 def main():
     problem = [[0, 8, 0, 0, 0, 0, 2, 0, 5],
