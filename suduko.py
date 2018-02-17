@@ -77,8 +77,8 @@ def eliminate(problem, location, listOfLocations):
             problem[position[0]][position[1]] = elimination_set - singleton
             if len(problem[position[0]][position[1]]) < len(elimination_set):
                 count += 1
-
-    #print(problem)
+                print(count)
+    print(count)
     return count
 
 
@@ -88,7 +88,7 @@ def solve(problem):
     eliminated (eliminate returns something other than zero), repeat this procedure. When it is no longer possible
     to eliminate anything, return the boolean result.
     """
-    sum_count = 0
+    count = 0
     while not isSolved(problem):
         for rowi, row in enumerate(problem):
             for colj, num in enumerate(problem):
@@ -98,7 +98,7 @@ def solve(problem):
                     listOfLocations = getBoxLocations(location) + getColumnLocations(location[1]) + getRowLocations(location[0])
                     #print(listOfLocations)
                     eliminate(problem, location, listOfLocations)
-                    # sum_count += eliminate(problem, location, listOfLocations)
+                    #count += eliminate(problem, location, listOfLocations)
     print(problem)
     convertToInts(problem)
     print(problem)
