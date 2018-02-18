@@ -1,3 +1,5 @@
+import time
+
 
 def read_sudoku(file):
     stream = open(file)
@@ -69,7 +71,6 @@ def eliminate(problem, location, listOfLocations):
      writing unit tests easier)."""
     count = 0
     singleton = problem[location[0]][location[1]]
-    #print(singleton)
     for position in listOfLocations:
         if position != location:
             elimination_set = problem[position[0]][position[1]]  # identify the set to have an element eliminated from
@@ -77,16 +78,16 @@ def eliminate(problem, location, listOfLocations):
             problem[position[0]][position[1]] = elimination_set - singleton
             if len(problem[position[0]][position[1]]) < len(elimination_set):
                 count += 1
-                print(count)
-    print(count)
+                #print(count)
+
     return count
 
 
 def solve(problem):
-    """This function changes the array problem andreturns True if the problem has been solved, False otherwise.
-    Here's what this function needs to do. For every location in the array, call eliminate with row, column, and box locations. If any values have been
-    eliminated (eliminate returns something other than zero), repeat this procedure. When it is no longer possible
-    to eliminate anything, return the boolean result.
+    """This function changes the array problem and returns True if the problem has been solved, False otherwise.
+    Here's what this function needs to do. For every location in the array, call eliminate with row, column, and box
+    locations. If any values have been eliminated (eliminate returns something other than zero), repeat this procedure.
+     When it is no longer possible to eliminate anything, return the boolean result.
     """
     count = 0
     while not isSolved(problem):
@@ -94,16 +95,15 @@ def solve(problem):
             for colj, num in enumerate(problem):
                 if len(problem[rowi][colj]) == 1: # If a singleton is found eliminate it from row, columns and box
                     location = (rowi, colj)
-                    #print(location)
                     listOfLocations = getBoxLocations(location) + getColumnLocations(location[1]) + getRowLocations(location[0])
-                    #print(listOfLocations)
-                    eliminate(problem, location, listOfLocations)
-                    #count += eliminate(problem, location, listOfLocations)
+                    count += eliminate(problem, location, listOfLocations)
+                    print(count)
+                #if(rowi, colj) == (len(problem), len(problem[0])) and count == 0: # If on the last element stop the program
+
     print(problem)
     convertToInts(problem)
     print(problem)
-
-    print_sudoku(problem) # need to get rid of the list brackets, perhaps join.
+    print_sudoku(problem)
 
 def isSolved(problem):
     """Given a two-dimensional array problem of sets, return True if the Sudoku problem has been solved
@@ -115,19 +115,10 @@ def isSolved(problem):
     return True
 
 def main():
-    problem = [[1, 2, 4,  7, 5, 3,  6, 8, 9],
-                   [3, 7, 8,  9, 6, 4,  2, 5, 1],
-                   [5, 9, 6,  8, 1, 2,  3, 4, 7],
-
-                   [6, 3, 9,  5, 2, 7,  8, 1, 4],
-                   [8, 1, 2,  3, 4, 9,  7, 6, 5],
-                   [7, 4, 5,  6, 8, 1,  9, 2, 3],
-
-                   [4, 8, 3,  1, 7, 6,  5, 9, 2],
-                   [2, 6, 7,  4, 9, 5,  1, 3, 8],
-                   [9, 5, 1,  2, 3, 8,  4, 7, 6]]
-    #read_sudoku(problem)
-    #print_sudoku(problem)
+    print("Please provide file name of puzzle", end='')
+    file= input()
+    problem = read_sudoku(file)
+    print_sudoku(problem)
     problem = convertToSets(problem)
 
     solve(problem)
