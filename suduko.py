@@ -36,20 +36,20 @@ def convertToSets(problem):
 
 
 def convertToInts_failed(problem):
-    "If the solving has failed, the unsolved locations are given a value of 0"
-    for i, row in enumerate(problem):  # Gives a row index and the row
+    """If the solving has failed, the unsolved locations are given a value of 0"""
+    for i, row in enumerate(problem):
         for j, num in enumerate(row):
             problem[i][j] = list(num)
             if len(problem[i][j]) == 1:
                 problem[i][j] = problem[i][j][0]
             else:
-                problem[i][j] = 0
+                problem[i][j] = 0 #
     return problem
 
 
 def convertToInts(problem):
-    "Converts a 2d array of sets to integers"
-    for i, row in enumerate(problem):  # Gives a row index and the row
+    """Converts a 2d array of sets to integers"""
+    for i, row in enumerate(problem):
         for j, num in enumerate(row):
             problem[i][j] = list(num)
             if len(problem[i][j]) == 1:
@@ -66,7 +66,7 @@ def getRowLocations(rowNumber):
 def getColumnLocations(columnNumber):
     """Function that returns a list of tuples, each specifying the location of elements of a column based on a column number
         (i,j)"""
-    return sorted([(j, columnNumber) for j in range(0,9)])
+    return sorted([(j, columnNumber) for j in range(0, 9)])
 
 
 def getBoxLocations(location):
@@ -94,8 +94,6 @@ def eliminate(problem, location, listOfLocations):
             problem[position[0]][position[1]] = elimination_set - singleton
             if len(problem[position[0]][position[1]]) < len(elimination_set):
                 count += 1
-                #print(count)
-
     return count
 
 
